@@ -1,0 +1,27 @@
+.label {
+  display: block;
+  margin-bottom: 30px;
+}
+
+.text {
+  margin: 0;
+  margin-bottom: 10px;
+  padding: 0;
+  font-size: 20px;
+}
+
+.input {
+  width: 100%;
+  padding: 10px 20px;
+
+  border: 2px solid #000000;
+  border-radius: 10px;
+  outline: none;
+}
+
+.input:hover,
+.input:focus,
+.input:not(:placeholder-shown) {
+  border: 2px solid rgb(29, 46, 199);
+  border-radius: 10px;
+}

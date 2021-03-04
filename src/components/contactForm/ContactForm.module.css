@@ -1,0 +1,60 @@
+.wrap {
+  margin-bottom: 40px;
+}
+
+.form {
+  padding: 30px;
+  border: 2px solid #000000;
+  border-radius: 15px;
+}
+
+.label {
+  display: block;
+}
+
+.label:not(:last-child) {
+  margin-bottom: 15px;
+}
+
+.wrapLabel {
+  margin-bottom: 30px;
+}
+
+.input {
+  width: 100%;
+  padding: 10px 20px;
+  border: 2px solid #000000;
+  border-radius: 10px;
+  outline: none;
+}
+
+.input:hover,
+.input:focus,
+.input:not(:placeholder-shown) {
+  border: 2px solid rgb(29, 46, 199);
+  border-radius: 10px;
+}
+
+.text {
+  margin: 0;
+  padding: 0;
+  margin-bottom: 5px;
+}
+
+.button {
+  width: 150px;
+  margin: 0;
+  padding: 10px;
+  border: 2px solid #000000;
+  color: #ffffff;
+  border-radius: 10px;
+  background: #000000;
+  outline: none;
+  cursor: pointer;
+}
+
+.button:hover,
+.button:focus {
+  border: 2px solid rgb(29, 46, 199);
+  background: rgb(29, 46, 199);
+}

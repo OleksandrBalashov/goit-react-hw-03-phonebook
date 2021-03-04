@@ -1,0 +1,47 @@
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.title {
+  margin: 0;
+  font-size: 30px;
+
+  margin-bottom: 30px;
+}
+
+.list {
+  font-size: 24px;
+  border: 2px solid #000000;
+  border-radius: 15px;
+}
+
+.item {
+  display: flex;
+  padding: 8px 20px;
+}
+
+.text {
+  margin: 0;
+  font-weight: 500;
+}
+
+.button {
+  margin: 0;
+  margin-left: auto;
+  padding: 5px;
+
+  font-size: 14px;
+  border: 1px solid #000000;
+  border-radius: 5px;
+  background: transparent;
+
+  cursor: pointer;
+}
+
+.button:hover,
+.button:focus {
+  background: rgb(29, 46, 199);
+  color: #ffffff;
+}
