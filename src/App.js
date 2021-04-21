@@ -61,7 +61,6 @@ export default class App extends Component {
 
   render() {
     const { contacts, filter } = this.state;
-
     return (
       <Layout>
         <h1 className="app__title">Phonebook</h1>
