@@ -1,38 +1,48 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import styles from './ContactForm.module.css';
+import { Contact } from '../../interfacesTypes/interfaces';
 
-const initialState = {
-  name: '',
-  number: '',
-};
-export default class ContactForm extends Component {
-  state = {
-    ...initialState,
+interface Props {
+  onSubmitForm(contact: Contact): void;
+  initialValue: Contact;
+}
+
+export default class ContactForm extends Component<Props> {
+  static defaultProps = {
+    initialValue: {
+      name: '',
+      number: '',
+    },
   };
 
-  handleInputChange = e => {
+  state = {
+    ...this.props.initialValue,
+  };
+
+  handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.currentTarget;
 
     this.setState({ [name]: value });
   };
 
-  handlerSubmitContactFrom = e => {
+  handlerSubmitContactFrom = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const { name, number } = e.currentTarget;
-    if (name.value === '' && number.value === '') return;
+    const { name, number } = this.state;
+
+    if (name === '' && number === '') return;
 
     this.props.onSubmitForm(this.state);
     this.resetForm();
   };
 
   resetForm = () => {
-    this.setState({ ...initialState });
+    this.setState({ ...this.props.initialValue });
   };
 
   render() {
     const { name, number } = this.state;
+
     return (
       <div className={styles.wrap}>
         <form className={styles.form} onSubmit={this.handlerSubmitContactFrom}>
@@ -68,7 +78,3 @@ export default class ContactForm extends Component {
     );
   }
 }
-
-ContactForm.propTypes = {
-  onSubmitForm: PropTypes.func.isRequired,
-};

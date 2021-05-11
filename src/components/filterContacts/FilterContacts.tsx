@@ -1,8 +1,11 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import styles from './FilterContacts.module.css';
 
-const FilterContacts = ({ value, onChange }) => (
+interface Props {
+  value: string;
+  onChange(e: React.ChangeEvent<HTMLInputElement>): void;
+}
+
+const FilterContacts = ({ value, onChange }: Props) => (
   <>
     <h3 className={styles.text}>Find contacts by name:</h3>
     <label className={styles.label}>
@@ -16,14 +19,5 @@ const FilterContacts = ({ value, onChange }) => (
     </label>
   </>
 );
-
-FilterContacts.defaultProps = {
-  value: '',
-};
-
-FilterContacts.propTypes = {
-  value: PropTypes.string,
-  onChange: PropTypes.func.isRequired,
-};
 
 export default FilterContacts;

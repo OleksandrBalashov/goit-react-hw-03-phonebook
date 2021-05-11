@@ -4,41 +4,50 @@ import ContactForm from './components/contactForm';
 import Layout from './components/layout';
 import FilterContacts from './components/filterContacts';
 import ContactList from './components/contactList';
+import { Contact } from './interfacesTypes/interfaces';
 
-export default class App extends Component {
-  state = {
+interface State {
+  contacts: Contact[];
+  filter: string;
+}
+
+export default class App extends Component<{}, State> {
+  state: State = {
     contacts: [],
     filter: '',
   };
 
   componentDidMount() {
-    const contacts = JSON.parse(localStorage.getItem('contacts'));
+    const contacts: Contact[] = JSON.parse(
+      localStorage.getItem('contacts') || '[]',
+    );
+
     if (contacts) {
-      this.setState({ contacts: contacts });
+      this.setState({ contacts });
     }
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps: {}, prevState: State) {
     const { contacts } = this.state;
     if (contacts !== prevState.contacts) {
       localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
     }
   }
 
-  addContact = contact => {
+  addContact = (contact: Contact) => {
     this.setState(prevState => {
       const newContacts = [...prevState.contacts];
 
       if (newContacts.find(({ name }) => name === contact.name)) {
         alert(`${contact.name} is already in contacts`);
-        return;
+        return null;
       }
 
       return { contacts: [...newContacts, { id: uuidv4(), ...contact }] };
     });
   };
 
-  handleFilterChange = e => {
+  handleFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
 
     this.setState({ filter: value });
@@ -48,14 +57,22 @@ export default class App extends Component {
     const { contacts, filter } = this.state;
     const normalizedFilter = filter.toLowerCase();
 
-    return contacts.filter(({ name }) =>
-      name.toLowerCase().includes(normalizedFilter),
-    );
+    if (contacts) {
+      return contacts.filter(({ name }) => {
+        if (typeof name === 'string') {
+          return name.toLowerCase().includes(normalizedFilter);
+        }
+
+        return null;
+      });
+    }
+
+    return [];
   };
 
-  deleteContact = idContact => {
+  deleteContact = (_id: string) => {
     this.setState(({ contacts }) => ({
-      contacts: contacts.filter(({ id }) => id !== idContact),
+      contacts: contacts.filter(({ id }) => id !== _id),
     }));
   };
 

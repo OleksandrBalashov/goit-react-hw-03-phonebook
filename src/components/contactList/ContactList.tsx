@@ -1,8 +1,12 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import { Contact } from '../../interfacesTypes/interfaces';
 import styles from './Contact.module.css';
 
-const ContactList = ({ contacts, onDeleteContact }) => (
+interface Props {
+  contacts: Contact[];
+  onDeleteContact(id?: string): void;
+}
+
+const ContactList = ({ contacts, onDeleteContact }: Props) => (
   <ul className={styles.list}>
     {contacts.map(({ name, number, id }) => (
       <li key={id} className={styles.item}>
@@ -20,10 +24,5 @@ const ContactList = ({ contacts, onDeleteContact }) => (
     ))}
   </ul>
 );
-
-ContactList.propTypes = {
-  contacts: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)).isRequired,
-  onDeleteContact: PropTypes.func,
-};
 
 export default ContactList;
